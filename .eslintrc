@@ -1,23 +1,29 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
       "ecmaVersion": 2020,
       "sourceType": "module",
       "ecmaFeatures": {
-          "jsx": true
+        "jsx": true
       }
-  },
-  "settings": {
+    },
+    "settings": {
       "react": {
-          "version": "detect"
+        "version": "detect"
       }
-  },
-  "extends": ["plugin:react/recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
-  "rules": {
+    },
+    "extends": [
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "rules": {
       "prettier/prettier": "error",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/explicit-function-return-type": "warn",
-      "@typescript-eslint/consistent-type-definitions": "warn"
-  },
-  "plugins": ["prettier", "@typescript-eslint"]
-}
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "react/prop-types": "off"
+    },
+    "plugins": ["prettier", "@typescript-eslint"]
+  }
+  
