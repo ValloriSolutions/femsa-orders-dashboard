@@ -11,20 +11,20 @@ jobs:
                   token: ${{ secrets.VERCEL_TOKEN }}
                   teamId: ${{ secrets.VERCEL_ORG_ID }}
                   projectName: femsa-orders-dashboard
-                  envVariableKeys: NPM_TOKEN,GITHUB_TOKEN
+                  envVariableKeys: NPM_TOKEN,GH_TOKEN
               env:
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
                   TARGET_NPM_TOKEN: production
                   TYPE_NPM_TOKEN: plain
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  TARGET_GITHUB_TOKEN: production
-                  TYPE_GITHUB_TOKEN: plain
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+                  TARGET_GH_TOKEN: production
+                  TYPE_GH_TOKEN: plain
 
             - name: deploy site to vercel
               uses: amondnet/vercel-action@v20
               with:
                   vercel-token: ${{ secrets.VERCEL_TOKEN }}
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  GH-token: ${{ secrets.GH_TOKEN }}
                   vercel-args: '--prod'
                   vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
                   vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
