@@ -13,8 +13,10 @@ jobs:
                   projectName: femsa-orders-dashboard
                   envVariableKeys: NPM_TOKEN,GH_TOKEN
               env:
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+                  TARGET_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  TARGET_GH_TOKEN: ${{ secrets.GH_TOKEN }}
+                  TYPE_NPM_TOKEN: plain
+                  TYPE_GH_TOKEN: plain
 
             - name: deploy site to vercel
               uses: amondnet/vercel-action@v20
