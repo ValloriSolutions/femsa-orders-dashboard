@@ -11,6 +11,7 @@ jobs:
                   token: ${{ secrets.VERCEL_TOKEN }}
                   teamId: ${{ secrets.VERCEL_ORG_ID }}
                   projectName: femsa-orders-dashboard
+                  envVariableKeys: NPM_TOKEN,GH_TOKEN
 
             - name: deploy site to vercel
               uses: amondnet/vercel-action@v20
