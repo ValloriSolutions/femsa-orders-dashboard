@@ -7,7 +7,7 @@
         "@types/react": "^16.9.53",
         "@types/react-dom": "^16.9.8",
         "@types/styled-components": "^5.1.14",
-        "@vallorisolutions/foa-design-system": "0.1.9",
+        "@vallorisolutions/foa-design-system": "0.1.20",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-scripts": "4.0.3",
