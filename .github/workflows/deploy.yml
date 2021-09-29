@@ -23,8 +23,6 @@ jobs:
             - name: deploy site to vercel
               uses: amondnet/vercel-action@v20
               with:
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
                   vercel-token: ${{ secrets.VERCEL_TOKEN }}
                   github-token: ${{ secrets.GITHUB_TOKEN }}
                   vercel-args: '--prod'
