@@ -2056,10 +2056,10 @@
     "@typescript-eslint/types" "4.31.2"
     eslint-visitor-keys "^2.0.0"
 
-"@vallorisolutions/foa-design-system@0.1.20":
-  version "0.1.20"
-  resolved "https://npm.pkg.github.com/download/@vallorisolutions/foa-design-system/0.1.20/e1d58eef10af515614735b9b443ed4a1fe1eb4e54ad0bec73cc8086dfdeb7fea#68dfc9ad9c86faa266e7bef2efa4a46bc4cd9cc5"
-  integrity sha512-Y7EwMiAydIHy3EZhymrAxgyi19cQNPHTWG8KY1NBZA5+f/+ztePcHAkZtUfx7e1T3clpsHoU5bz8MK+daOnnYg==
+"@vallorisolutions/foa-design-system@0.2.0":
+  version "0.2.0"
+  resolved "https://npm.pkg.github.com/download/@vallorisolutions/foa-design-system/0.2.0/ed5d1d9e414cbaf075d3093d125a8bef036aa6fbcde51f60542da68a660d614e#0529b630e52e07932ebcf7150ca84997acc8e9ac"
+  integrity sha512-LNSVFxN5dY8o0fcSE78GvwhKCiHSDwirEBOTdaYMJ6Bx7QupMVVqsbjy3APqd2MBMVAL0yeTn2+Z296Elk7iPg==
   dependencies:
     "@types/styled-components" "^5.1.14"
     react-feather "^2.0.9"
