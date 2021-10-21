@@ -32,12 +32,12 @@ export const MenuItems = (): Array<MenuItemProps> => {
             dropdownItems: [
                 {
                     title: 'Ver Requisições',
-                    onClick: (): void => history.push('requisicoes-de-compra'),
+                    onClick: (): void => history.push('/requisicoes-de-compra/'),
                     active: isActive('/requisicoes-de-compra/'),
                 },
                 {
                     title: 'Criar Requisição',
-                    onClick: (): void => history.push('requisicoes-de-compra/nova/'),
+                    onClick: (): void => history.push('/requisicoes-de-compra/nova/'),
                     active: isActive('/requisicoes-de-compra/nova/'),
                 },
             ],
