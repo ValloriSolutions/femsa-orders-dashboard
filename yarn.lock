@@ -2079,10 +2079,10 @@
     "@typescript-eslint/types" "4.33.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vallorisolutions/foa-design-system@0.2.23":
-  version "0.2.23"
-  resolved "https://npm.pkg.github.com/download/@vallorisolutions/foa-design-system/0.2.23/8ab4861a8b149593bfb985870bc851abc19351bcc74f28fcc15706352965f2a5#359544a3d7f3fd9e166bf39383e37a78d1675211"
-  integrity sha512-MSGEzrGA1NRo0yTHP1hQMnfVycYFpkl7K/EcOtgz5Zj1gUb3vFoetqWVB20ogPLZ1reMVSTlZF4it5sQTV5uKw==
+"@vallorisolutions/foa-design-system@0.2.29":
+  version "0.2.29"
+  resolved "https://npm.pkg.github.com/download/@vallorisolutions/foa-design-system/0.2.29/8e3cc1d767802dde068b4bc969caf4a79118f5afcb57ae2eda90be87a9c070e0#9a307ab56447e47b2c4f05ba4dc16fee147c8721"
+  integrity sha512-3tlhvZAIIBg9GgRkRKRorXPshK9SDfmk6eEtxl+KJmtPL2sE8SBFeMjD6Mub6VbB5LcJcVCOUV0QMJw6W2l7LQ==
   dependencies:
     "@types/react-router-dom" "^5.3.1"
     "@types/styled-components" "^5.1.14"

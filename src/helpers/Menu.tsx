@@ -1,9 +1,14 @@
 import React from 'react';
 import { IconDashboard, IconTicket, IconCredit, MenuItemProps } from '@vallorisolutions/foa-design-system';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 export const MenuItems = (): Array<MenuItemProps> => {
     const history = useHistory();
+    const location = useLocation();
+
+    const isActive = (path: string): boolean => {
+        return location.pathname === path;
+    };
     const navigate = (route: string): void => {
         history.push(route);
     };
@@ -12,12 +17,13 @@ export const MenuItems = (): Array<MenuItemProps> => {
             title: 'Página Inicial',
             onClick: (): void => navigate('/'),
             icon: <IconDashboard />,
-            active: true,
+            active: isActive('/'),
         },
         {
             title: 'Tickets',
             onClick: (): void => history.push('/tickets'),
             icon: <IconTicket />,
+            active: isActive('/tickets'),
         },
         {
             title: 'Req. de Compra',
@@ -27,10 +33,12 @@ export const MenuItems = (): Array<MenuItemProps> => {
                 {
                     title: 'Ver Requisições',
                     onClick: (): void => history.push('requisicoes-de-compra'),
+                    active: isActive('/requisicoes-de-compra/'),
                 },
                 {
                     title: 'Criar Requisição',
                     onClick: (): void => history.push('requisicoes-de-compra/nova/'),
+                    active: isActive('/requisicoes-de-compra/nova/'),
                 },
             ],
         },
