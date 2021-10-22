@@ -46,7 +46,7 @@ const Navigation: React.FC = (): JSX.Element => {
                         <Route exact path="/tickets">
                             <Tickets />
                         </Route>
-                        <Route exact path="/tickets/:id">
+                        <Route exact path="/ticket/:id">
                             <Ticket />
                         </Route>
                     </Switch>
