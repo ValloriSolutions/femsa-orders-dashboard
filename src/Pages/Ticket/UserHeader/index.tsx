@@ -1,4 +1,4 @@
-import { FlexBox, Typography, Avatar } from '@vallorisolutions/foa-design-system';
+import { FlexBox, Typography, Avatar, colors } from '@vallorisolutions/foa-design-system';
 import React from 'react';
 
 interface UserHeaderProps {
@@ -13,8 +13,12 @@ const UserHeader: React.FC<UserHeaderProps> = ({ name, avatar, date }) => {
             <Avatar alt={name} imageUrl={avatar} size="sm" />
 
             <FlexBox verticalAlign="flex-start" horizontalAlign="center" customStyles={{ padding: '0 0 0 12px' }}>
-                <Typography as="h6">{name}</Typography>
-                <Typography as="small">{date}</Typography>
+                <Typography as="h6" customStyles={{ color: colors.red }}>
+                    {name}
+                </Typography>
+                <Typography as="small" customStyles={{ color: colors.colors.gray.light, marginTop: 5 }}>
+                    {date}
+                </Typography>
             </FlexBox>
         </FlexBox>
     );

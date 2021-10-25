@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { uuid } from '../../../helpers/utils';
 import { Button, Input, Select, Typography } from '@vallorisolutions/foa-design-system';
+import RichTextEditor from '../../Ticket/Editor/Editor';
 
 const intialValues = {
     id: uuid(),
@@ -76,12 +77,10 @@ const NewTicketForm: React.FC = (): JSX.Element => {
                 options={subjectOptions}
             />
             <br />
-            <Input
-                label="Digite sua mensagem"
-                placeholder="Digite sua mensagem"
-                value={formik.values.message}
-                onChange={(e): any => formik.setFieldValue('message', e.target.value)}
-            />
+            <Typography as="label">Digite sua mensagem</Typography>
+            <div style={{ padding: '10px' }}>
+                <RichTextEditor />
+            </div>
             <br />
             <Button size="full" variant="primary" onClick={(): any => formik.submitForm}>
                 Enviar Solicitação
