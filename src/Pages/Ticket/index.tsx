@@ -2,6 +2,7 @@ import {
     Button,
     Card,
     Col,
+    colors,
     Divider,
     FlexBox,
     IconArrowLeft,
@@ -17,29 +18,34 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { api } from '../../api';
 import { TicketStatusBadge } from '../../helpers/tickets';
-import RichTextEditor from './Editor/Editor';
 import UserHeader from './UserHeader';
+import ReactLoading from 'react-loading';
+import RichTextEditor from '../../components/Editor/Editor';
 
 const Ticket: React.FC = (): JSX.Element => {
     const history = useHistory();
     const { pathname } = useLocation();
     const id = pathname.split('/')[2];
     const [ticketData, setTicketData] = useState<TicketProps>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [messageData, setMessageData] = useState<MessageProps[]>([]);
 
     const fetchTicket = async (): Promise<void> => {
         const { data } = await api.get<TicketProps>(`tickets/${id}`);
         setTicketData(data);
+        setIsLoading(false);
     };
     const fetchMessages = async (): Promise<void> => {
         const { data } = await api.get<MessageProps[]>(`messages?ticketId=9bce02c`);
         setMessageData(data);
+        setIsLoading(false);
     };
 
     useEffect(() => {
         fetchTicket();
         fetchMessages();
     }, []);
+
     const boxProps = {
         noPadding: true,
         horizontalAlign: 'space-between',
@@ -48,7 +54,7 @@ const Ticket: React.FC = (): JSX.Element => {
         direction: 'row',
     };
 
-    return ticketData ? (
+    return !isLoading && ticketData ? (
         <>
             <Card fullWidth verticalAlign="flex-start" horizontalAlign="flex-start">
                 <Row fluid customStyles={{ flexWrap: 'wrap' }}>
@@ -208,7 +214,9 @@ const Ticket: React.FC = (): JSX.Element => {
             </Card>
         </>
     ) : (
-        <div>Loading...</div>
+        <FlexBox fullHeight fullWidth verticalAlign="center" horizontalAlign="center">
+            <ReactLoading type="spinningBubbles" color={colors.red} />
+        </FlexBox>
     );
 };
 

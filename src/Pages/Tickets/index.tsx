@@ -14,6 +14,7 @@ import {
     Card,
     TicketStatus,
     colors,
+    FlexBox,
 } from '@vallorisolutions/foa-design-system';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
@@ -21,6 +22,7 @@ import { css } from 'styled-components';
 import { api } from '../../api';
 import { TicketStatusBadge } from '../../helpers/tickets';
 import NewTicketForm from './NewTicketForm';
+import ReactLoading from 'react-loading';
 
 interface LocalTicketsProps extends TicketProps {
     supplierOnline: boolean;
@@ -29,17 +31,19 @@ interface LocalTicketsProps extends TicketProps {
 const Tickets: React.FC = (): JSX.Element => {
     const history = useHistory();
     const [ticketList, setTicketList] = useState<LocalTicketsProps[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const fetchTickets = async (): Promise<void> => {
         const { data } = await api.get<LocalTicketsProps[]>('tickets');
         setTicketList(data);
+        setIsLoading(false);
     };
 
     useEffect(() => {
         fetchTickets();
     }, []);
 
-    return (
+    return !isLoading && ticketList.length > 0 ? (
         <>
             <Row>
                 <Col>
@@ -140,6 +144,10 @@ const Tickets: React.FC = (): JSX.Element => {
                 </Col>
             </Row>
         </>
+    ) : (
+        <FlexBox fullHeight fullWidth verticalAlign="center" horizontalAlign="center">
+            <ReactLoading type="spinningBubbles" color={colors.red} />
+        </FlexBox>
     );
 };
 

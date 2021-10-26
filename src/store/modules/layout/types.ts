@@ -12,7 +12,7 @@ export interface LayoutState {
             title: string;
             subtitle: string;
             cancelButton?: { title: string; action?: (() => void) | undefined } | undefined;
-            confirmButton: { title: string; action?: (() => void) | undefined };
+            confirmButton?: { title: string; action?: (() => void) | undefined };
             children: React.ReactNode;
         };
     };

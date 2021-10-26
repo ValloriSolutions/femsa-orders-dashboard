@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { uuid } from '../../../helpers/utils';
 import { Button, Input, Select, Typography } from '@vallorisolutions/foa-design-system';
-import RichTextEditor from '../../Ticket/Editor/Editor';
+import RichTextEditor from '../../../components/Editor/Editor';
 
 const intialValues = {
     id: uuid(),

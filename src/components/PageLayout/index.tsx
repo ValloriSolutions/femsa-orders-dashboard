@@ -1,15 +1,63 @@
-import { LayoutWrapper, UserRole, IconTicket } from '@vallorisolutions/foa-design-system';
+import { LayoutWrapper, UserRole, IconTicket, IconCredit, IconDashboard } from '@vallorisolutions/foa-design-system';
 import React, { useState } from 'react';
-import { useLocation } from 'react-router';
-import { MenuItems } from '../../helpers/Menu';
+import { useDispatch } from 'react-redux';
+import { useHistory, useLocation } from 'react-router';
+import NewRequestForm from '../../Pages/NewOrderRequest/NewRequestForm';
+import { setDialogInfo } from '../../store/modules/layout/actions';
 
 const PageLayout: React.FC = ({ children }): JSX.Element => {
+    const history = useHistory();
+    const location = useLocation();
     const [term, setTerm] = useState('');
     const { pathname } = useLocation();
+    const dispatch = useDispatch();
+
+    const isActive = (path: string): boolean => {
+        return location.pathname === path;
+    };
+    const navigate = (route: string): void => {
+        history.push(route);
+    };
+    const openPRDialog = (): void => {
+        dispatch(
+            setDialogInfo({
+                isOpen: true,
+                info: {
+                    title: 'Nova requisição de compra',
+                    subtitle: 'Preencha os dados abaixo para criar sua requisição',
+                    children: <NewRequestForm />,
+                },
+            }),
+        );
+    };
     return (
         <LayoutWrapper
             searchPlaceholder={pathname === '/tickets' ? 'Digite o numero do ticket' : 'busque uma ordem de serviço'}
-            menuItems={MenuItems()}
+            menuItems={[
+                {
+                    title: 'Página Inicial',
+                    onClick: (): void => navigate('/'),
+                    icon: <IconDashboard />,
+                    active: isActive('/'),
+                },
+                {
+                    title: 'Tickets',
+                    onClick: (): void => history.push('/tickets'),
+                    icon: <IconTicket />,
+                    active: isActive('/tickets'),
+                },
+                {
+                    title: 'Ver Requisições',
+                    onClick: (): void => history.push('/requisicoes-de-compra/'),
+                    icon: <IconCredit />,
+                    active: isActive('/requisicoes-de-compra/'),
+                },
+                {
+                    title: 'Nova requisição',
+                    icon: <IconCredit />,
+                    onClick: (): void => openPRDialog(),
+                },
+            ]}
             searchTerm={term}
             onChange={(e): void => setTerm(e.target.value)}
             user={{

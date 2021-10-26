@@ -9,7 +9,13 @@ const DialogContainer = (): JSX.Element => {
     const { dialog } = useSelector((state: RootReducer) => state.layout);
 
     return (
-        <Dialog isOpen={dialog.isOpen} setOpen={(): void => dispatch(resetDialog())} info={dialog.info}>
+        <Dialog
+            horizontalAlign="flex-start"
+            isOpen={dialog.isOpen}
+            setOpen={(): void => dispatch(resetDialog())}
+            info={dialog.info}
+            width="700px"
+        >
             {dialog.info.children}
         </Dialog>
     );

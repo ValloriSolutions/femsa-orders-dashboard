@@ -26,21 +26,16 @@ export const MenuItems = (): Array<MenuItemProps> => {
             active: isActive('/tickets'),
         },
         {
-            title: 'Req. de Compra',
-            onClick: (): void => history.push('#'),
+            title: 'Ver Requisições',
+            onClick: (): void => history.push('/requisicoes-de-compra/'),
             icon: <IconCredit />,
-            dropdownItems: [
-                {
-                    title: 'Ver Requisições',
-                    onClick: (): void => history.push('/requisicoes-de-compra/'),
-                    active: isActive('/requisicoes-de-compra/'),
-                },
-                {
-                    title: 'Criar Requisição',
-                    onClick: (): void => history.push('/requisicoes-de-compra/nova/'),
-                    active: isActive('/requisicoes-de-compra/nova/'),
-                },
-            ],
+            active: isActive('/requisicoes-de-compra/'),
+        },
+        {
+            title: 'Criar Requisição',
+            onClick: (): void => history.push('/requisicoes-de-compra/nova'),
+            icon: <IconCredit />,
+            active: isActive('/requisicoes-de-compra/nova'),
         },
     ];
 };
