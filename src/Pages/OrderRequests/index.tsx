@@ -7,15 +7,15 @@ import {
     Typography,
     Row,
     Col,
-    OrderRequisitionProps,
     colors,
 } from '@vallorisolutions/foa-design-system';
 import React, { useEffect, useState } from 'react';
 // import { useHistory } from 'react-router';
 import { api } from '../../api';
 import { OrderStatusBadges } from '../../helpers/orders';
+import { PurchaseRequisitionProps } from '../../mocks/entities';
 
-interface LocalOrdersProps extends OrderRequisitionProps {
+interface LocalOrdersProps extends PurchaseRequisitionProps {
     supplierOnline?: boolean;
 }
 

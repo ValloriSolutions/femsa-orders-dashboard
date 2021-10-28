@@ -6,11 +6,8 @@ import {
     Divider,
     FlexBox,
     IconArrowLeft,
-    MessageProps,
     Row,
     spacing,
-    TicketProps,
-    TicketStatus,
     Typography,
 } from '@vallorisolutions/foa-design-system';
 import { colors as palette } from '@vallorisolutions/foa-design-system';
@@ -20,7 +17,9 @@ import { api } from '../../api';
 import { TicketStatusBadge } from '../../helpers/tickets';
 import UserHeader from './UserHeader';
 import ReactLoading from 'react-loading';
-import RichTextEditor from '../../components/Editor/Editor';
+import RichTextEditor, { richTextInitialValue } from '../../components/Editor/Editor';
+import { Descendant } from 'slate';
+import { TicketProps, MessageProps, TicketStatus } from '../../mocks/entities';
 
 const Ticket: React.FC = (): JSX.Element => {
     const history = useHistory();
@@ -29,6 +28,7 @@ const Ticket: React.FC = (): JSX.Element => {
     const [ticketData, setTicketData] = useState<TicketProps>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [messageData, setMessageData] = useState<MessageProps[]>([]);
+    const [value, setValue] = useState<Descendant[]>(richTextInitialValue);
 
     const fetchTicket = async (): Promise<void> => {
         const { data } = await api.get<TicketProps>(`tickets/${id}`);
@@ -96,7 +96,7 @@ const Ticket: React.FC = (): JSX.Element => {
                                 Nenhuma mensagem encontrada para este ticket
                             </Typography>
                         )}
-                        {ticketData?.status !== TicketStatus.CANCELED ? (
+                        {ticketData?.status !== TicketStatus.Cancelado ? (
                             <div
                                 style={{
                                     padding: spacing.dialog,
@@ -108,7 +108,7 @@ const Ticket: React.FC = (): JSX.Element => {
                                     Enviar nova mensagem
                                 </Typography>
                                 <br />
-                                <RichTextEditor />
+                                <RichTextEditor value={value} setValue={setValue} />
 
                                 <Divider fullWidth />
                                 <FlexBox

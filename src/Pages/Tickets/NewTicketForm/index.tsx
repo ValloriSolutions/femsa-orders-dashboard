@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { uuid } from '../../../helpers/utils';
 import { Button, Input, Select, Typography } from '@vallorisolutions/foa-design-system';
-import RichTextEditor from '../../../components/Editor/Editor';
+import RichTextEditor, { richTextInitialValue } from '../../../components/Editor/Editor';
+import { Descendant } from 'slate';
 
 const intialValues = {
     id: uuid(),
@@ -19,6 +20,7 @@ const intialValues = {
 };
 
 const NewTicketForm: React.FC = (): JSX.Element => {
+    const [value, setValue] = useState<Descendant[]>(richTextInitialValue);
     const orderNumberOptions = [
         { id: 1, name: `#${uuid()} - Reval – Atacado de Papelaria` },
         { id: 2, name: `#${uuid()} - Eggplant - Asian` },
@@ -79,7 +81,7 @@ const NewTicketForm: React.FC = (): JSX.Element => {
             <br />
             <Typography as="label">Digite sua mensagem</Typography>
             <div style={{ padding: '10px' }}>
-                <RichTextEditor />
+                <RichTextEditor value={value} setValue={setValue} />
             </div>
             <br />
             <Button size="full" variant="primary" onClick={(): any => formik.submitForm}>

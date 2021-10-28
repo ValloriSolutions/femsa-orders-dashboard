@@ -6,13 +6,11 @@ import {
     TableCell,
     TableHead,
     TableRow,
-    TicketProps,
     Typography,
     DropdownItem,
     Row,
     Col,
     Card,
-    TicketStatus,
     colors,
     FlexBox,
 } from '@vallorisolutions/foa-design-system';
@@ -23,6 +21,7 @@ import { api } from '../../api';
 import { TicketStatusBadge } from '../../helpers/tickets';
 import NewTicketForm from './NewTicketForm';
 import ReactLoading from 'react-loading';
+import { TicketProps, TicketStatus } from '../../mocks/entities';
 
 interface LocalTicketsProps extends TicketProps {
     supplierOnline: boolean;
@@ -122,8 +121,8 @@ const Tickets: React.FC = (): JSX.Element => {
                                                 Ver
                                             </DropdownItem>
                                             {ticket.supplierOnline &&
-                                                ticket.status !== TicketStatus.CANCELED &&
-                                                ticket.status !== TicketStatus.SOLVED && (
+                                                ticket.status !== TicketStatus.Cancelado &&
+                                                ticket.status !== TicketStatus.Solucionado && (
                                                     <DropdownItem onClick={(): void => alert('aqui abre o chat')}>
                                                         Abrir Chat
                                                     </DropdownItem>

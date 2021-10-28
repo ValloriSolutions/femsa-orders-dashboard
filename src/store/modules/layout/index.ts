@@ -5,6 +5,7 @@ import { LayoutState, LayoutTypes } from './types';
 const INITIAL_STATE: LayoutState = {
     isLoading: false,
     dialog: {
+        disableBackdropClick: false,
         isOpen: false,
         info: {
             title: '',

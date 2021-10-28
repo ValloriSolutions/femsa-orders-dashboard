@@ -10,6 +10,7 @@ const DialogContainer = (): JSX.Element => {
 
     return (
         <Dialog
+            disableBackdropClick={dialog.disableBackdropClick}
             horizontalAlign="flex-start"
             isOpen={dialog.isOpen}
             setOpen={(): void => dispatch(resetDialog())}

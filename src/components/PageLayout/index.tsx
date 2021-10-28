@@ -1,7 +1,8 @@
-import { LayoutWrapper, UserRole, IconTicket, IconCredit, IconDashboard } from '@vallorisolutions/foa-design-system';
+import { LayoutWrapper, IconTicket, IconCredit, IconDashboard } from '@vallorisolutions/foa-design-system';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
+import { UserRole } from '../../mocks/entities';
 import NewRequestForm from '../../Pages/NewOrderRequest/NewRequestForm';
 import { setDialogInfo } from '../../store/modules/layout/actions';
 
@@ -21,6 +22,7 @@ const PageLayout: React.FC = ({ children }): JSX.Element => {
     const openPRDialog = (): void => {
         dispatch(
             setDialogInfo({
+                disableBackdropClick: true,
                 isOpen: true,
                 info: {
                     title: 'Nova requisição de compra',
@@ -65,7 +67,7 @@ const PageLayout: React.FC = ({ children }): JSX.Element => {
                 name: 'Suellen Marques',
                 avatar: 'https://avatars0.githubusercontent.com/u/1234?s=460&v=4',
                 email: 'suellen@femsa.com.br',
-                role: UserRole.ADMIN,
+                role: UserRole.admin,
             }}
             notifications={[
                 {

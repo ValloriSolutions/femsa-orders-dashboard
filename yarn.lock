@@ -1840,6 +1840,11 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
+"@types/faker@^5.5.9":
+  version "5.5.9"
+  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-5.5.9.tgz#588ede92186dc557bff8341d294335d50d255f0c"
+  integrity sha512-uCx6mP3UY5SIO14XlspxsGjgaemrxpssJI0Ol+GfhxtcKpv9pgRZYsS4eeKeHVLje6Qtc8lGszuBI461+gVZBA==
+
 "@types/glob@^7.1.1":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.2.0.tgz#bc1b5bf3aa92f25bd5dd39f35c57361bdce5b2eb"
@@ -2206,10 +2211,10 @@
     "@typescript-eslint/types" "4.33.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vallorisolutions/foa-design-system@0.4.4":
-  version "0.4.4"
-  resolved "https://npm.pkg.github.com/download/@vallorisolutions/foa-design-system/0.4.4/91a76ef7e814febc3248946efcf6caeeaf20efd3cff762bcf59717d8fdbb241f#3fe0188f0765daf2194b77c2c62791600245446d"
-  integrity sha512-K+sKIFL0/m8dLPLLz4UzRF5+EcL0Ud3iHgkCf5fJsaGf8znw00Tr5HyKoFuoTln1huurAdvnkmQm+DWz0I+bfQ==
+"@vallorisolutions/foa-design-system@0.5.0":
+  version "0.5.0"
+  resolved "https://npm.pkg.github.com/download/@vallorisolutions/foa-design-system/0.5.0/2e034476453527787ac627b916e596233c4793ed4336d0eda1fc777780ff12fb#6ecb93a5c51daa10a2ad51e94fc680c6746a9188"
+  integrity sha512-00WlPFo5lllBAtfwoZsQuuNv/vk0DsACPIqUK1F1Tfw/v1M9IWD6sE4Q8tkNH9DWb5hduzeedbVbwLDU+d4SNw==
   dependencies:
     "@types/react-router-dom" "^5.3.1"
     "@types/styled-components" "^5.1.14"
@@ -5143,6 +5148,11 @@ extglob@^2.0.4:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
+
+faker@^5.5.3:
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/faker/-/faker-5.5.3.tgz#c57974ee484431b25205c2c8dc09fda861e51e0e"
+  integrity sha512-wLTv2a28wjUyWkbnX7u/ABZBkUkIF2fCd73V6P2oFqEGEktDfzWx4UxrSqtPRw0xPRAcjeAOIiJWqZm3pP4u3g==
 
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
@@ -9711,6 +9721,11 @@ recursive-readdir@2.2.2:
   integrity sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==
   dependencies:
     minimatch "3.0.4"
+
+redux-devtools-extension@^2.13.9:
+  version "2.13.9"
+  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.9.tgz#6b764e8028b507adcb75a1cae790f71e6be08ae7"
+  integrity sha512-cNJ8Q/EtjhQaZ71c8I9+BPySIBVEKssbPpskBfsXqb8HJ002A3KRVHfeRzwRo6mGPqsm7XuHTqNSNeS1Khig0A==
 
 redux-thunk@*, redux-thunk@^2.3.0:
   version "2.3.0"

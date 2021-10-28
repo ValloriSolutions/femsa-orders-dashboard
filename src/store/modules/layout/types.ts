@@ -7,6 +7,7 @@ export enum LayoutTypes {
 export interface LayoutState {
     isLoading: boolean;
     dialog: {
+        disableBackdropClick: boolean;
         isOpen: boolean;
         info: {
             title: string;

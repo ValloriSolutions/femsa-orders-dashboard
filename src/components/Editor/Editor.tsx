@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import isHotkey from 'is-hotkey';
 import { Editable, withReact, useSlate, Slate, ReactEditor } from 'slate-react';
 import { Editor, Transforms, createEditor, Descendant, Element as SlateElement, BaseEditor } from 'slate';
@@ -36,8 +36,12 @@ const HOTKEYS: any = {
 
 const LIST_TYPES: any = ['numbered-list', 'bulleted-list'];
 
-const RichTextEditor: React.FC = (): JSX.Element => {
-    const [value, setValue] = useState<Descendant[]>(initialValue);
+interface RichTextEditorProps {
+    value: any;
+    setValue: (value: any) => void;
+}
+
+const RichTextEditor: React.FC<RichTextEditorProps> = ({ value, setValue }): JSX.Element => {
     const renderElement = useCallback((props) => <Element {...props} />, []);
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
     const editor: any = useMemo(() => withHistory(withReact(createEditor())), []);
@@ -148,7 +152,6 @@ const Element = ({ attributes, children, element }: any): any => {
 };
 
 const Leaf = ({ attributes, children, leaf }: any): any => {
-    console.log(leaf);
     if (leaf.bold) {
         children = <strong>{children}</strong>;
     }
@@ -198,7 +201,7 @@ const MarkButton = ({ format, icon }: any): any => {
     );
 };
 
-const initialValue: Descendant[] = [
+export const richTextInitialValue: Descendant[] = [
     {
         type: 'paragraph',
         children: [{ text: ' ' }],
