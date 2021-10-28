@@ -6,7 +6,7 @@ import { Button, FlexBox, Select, Textarea } from '@vallorisolutions/foa-design-
 import { useDispatch } from 'react-redux';
 import { resetDialog } from '../../../store/modules/layout/actions';
 import { useEffect } from 'react';
-import { setPRInfo } from '../../../store/modules/purchaseRequisition/actions';
+// import { setPRInfo } from '../../../store/modules/purchaseRequisition/actions';
 import { OrderType } from '../../../mocks/entities';
 
 const NewRequestForm: React.FC = (): JSX.Element => {
@@ -36,7 +36,7 @@ const NewRequestForm: React.FC = (): JSX.Element => {
             type: Yup.string().required('Escolha um typo para sua requisição'),
             requisitionGoal: Yup.string().required('Escolha um assunto'),
         }),
-        onSubmit: (values) => {
+        onSubmit: (/*values*/) => {
             //dispatch(setPRInfo(values));
         },
     });
