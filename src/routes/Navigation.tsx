@@ -3,7 +3,7 @@ import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-d
 import PageLayout from '../components/PageLayout';
 import Dashboard from '../Pages/Dashboard';
 import GenerateOrder from '../Pages/GenerateOrder';
-import NewOrderRequest from '../Pages/NewOrderRequest';
+import NewPurchaseRequisitionRequest from '../Pages/NewPurchaseRequisitionRequest';
 import OrderRequest from '../Pages/OrderRequest';
 import OrderRequests from '../Pages/OrderRequests';
 import OrderSummary from '../Pages/OrderSummary';
@@ -29,7 +29,7 @@ const Navigation: React.FC = (): JSX.Element => {
                             <OrderRequest />
                         </Route>
                         <Route exact path="/requisicoes-de-compra/nova">
-                            <NewOrderRequest />
+                            <NewPurchaseRequisitionRequest />
                         </Route>
                         <Route exact path="/gerar-ordem">
                             <GenerateOrder />

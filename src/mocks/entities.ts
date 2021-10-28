@@ -202,7 +202,7 @@ export interface NotificationProps extends ToolbarProps {
     isApproved?: boolean;
     seniorComment?: string;
     subtotal?: number | string;
-    submittedToSenniorAt?: string | Date;
+    submittedToSenniorAt: Date | number;
     openenedAt: string | Date;
     refreshList?: boolean;
 }

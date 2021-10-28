@@ -8,13 +8,16 @@ import {
     Row,
     Col,
     colors,
+    FlexBox,
 } from '@vallorisolutions/foa-design-system';
+import ReactLoading from 'react-loading';
 import React, { useEffect, useState } from 'react';
 // import { useHistory } from 'react-router';
 import { api } from '../../api';
 import { OrderStatusBadges } from '../../helpers/orders';
 import { PurchaseRequisitionProps } from '../../mocks/entities';
-
+import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 interface LocalOrdersProps extends PurchaseRequisitionProps {
     supplierOnline?: boolean;
 }
@@ -22,17 +25,19 @@ interface LocalOrdersProps extends PurchaseRequisitionProps {
 const orders: React.FC = (): JSX.Element => {
     // const history = useHistory();
     const [ordersList, setordersList] = useState<LocalOrdersProps[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const fetchOrders = async (): Promise<void> => {
-        const { data } = await api.get<LocalOrdersProps[]>('orders');
+        const { data } = await api.get<LocalOrdersProps[]>('purchase-requisition');
         setordersList(data);
+        setIsLoading(false);
     };
 
     useEffect(() => {
         fetchOrders();
     }, []);
 
-    return (
+    return !isLoading && ordersList.length > 0 ? (
         <>
             <Row>
                 <Col>
@@ -48,10 +53,10 @@ const orders: React.FC = (): JSX.Element => {
                                 <TableCell component="th" order={'DESC'} orderBy={'id'} width="150px">
                                     Nº da Ordem
                                 </TableCell>
-                                <TableCell component="th" order={'ASC'} orderBy={'type'} width="100px">
+                                <TableCell component="th" order={'ASC'} orderBy={'type'} width="200px">
                                     Tipo
                                 </TableCell>
-                                <TableCell component="th" order={'DESC'} orderBy={'requisitionGoal'} width="600px">
+                                <TableCell component="th" order={'DESC'} orderBy={'requisitionGoal'} width="400px">
                                     Objetivo
                                 </TableCell>
                                 <TableCell component="th" order={'ASC'} orderBy={'status'}>
@@ -81,7 +86,9 @@ const orders: React.FC = (): JSX.Element => {
                                         {OrderStatusBadges(order.status)?.badge}
                                     </TableCell>
                                     <TableCell component="td" hasBadge>
-                                        {order.submittedToSenniorAt}
+                                        {format(new Date(order?.submittedToSenniorAt), `dd/mm 'as' h:mm`, {
+                                            locale: ptBR,
+                                        })}
                                     </TableCell>
                                     <TableCell component="td"></TableCell>
                                 </TableRow>
@@ -94,6 +101,10 @@ const orders: React.FC = (): JSX.Element => {
             <br />
             <br />
         </>
+    ) : (
+        <FlexBox fullHeight fullWidth verticalAlign="center" horizontalAlign="center">
+            <ReactLoading type="spinningBubbles" color={colors.red} />
+        </FlexBox>
     );
 };
 

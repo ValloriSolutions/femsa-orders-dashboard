@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { UserRole } from '../../mocks/entities';
-import NewRequestForm from '../../Pages/NewOrderRequest/NewRequestForm';
+import NewRequestForm from '../../Pages/NewPurchaseRequisitionRequest/NewRequestForm';
 import { setDialogInfo } from '../../store/modules/layout/actions';
 
 const PageLayout: React.FC = ({ children }): JSX.Element => {

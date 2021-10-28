@@ -19,7 +19,7 @@ const INITIAL_STATE: PurchaseRequisitionState = {
         isApproved: false,
         seniorComment: '',
         subtotal: 0,
-        submittedToSenniorAt: '',
+        submittedToSenniorAt: new Date(),
         openenedAt: '',
         refreshList: false,
     },
