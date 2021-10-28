@@ -1,38 +1,54 @@
-import { LayoutWrapper, IconTicket, IconCredit, IconDashboard } from '@vallorisolutions/foa-design-system';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory, useLocation } from 'react-router';
-import { UserRole } from '../../mocks/entities';
+import {
+    LayoutWrapper,
+    IconTicket,
+    IconCredit,
+    IconDashboard,
+    FlexBox,
+    colors,
+} from '@vallorisolutions/foa-design-system';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { api } from '../../api';
+import { useModals } from '../../helpers/modals';
+import { usePath, useUrl } from '../../helpers/utils';
+import { PurchaseOrganizationProps, PurchaseRequisitionProps } from '../../mocks/entities';
 import NewRequestForm from '../../Pages/NewPurchaseRequisitionRequest/NewRequestForm';
-import { setDialogInfo } from '../../store/modules/layout/actions';
+import { RootReducer } from '../../store/modules';
+import { setOperatorInfo, setPOInfo, setRepresentativeInfo } from '../../store/modules/auth/actions';
+import ReactLoading from 'react-loading';
 
 const PageLayout: React.FC = ({ children }): JSX.Element => {
-    const history = useHistory();
-    const location = useLocation();
     const [term, setTerm] = useState('');
-    const { pathname } = useLocation();
     const dispatch = useDispatch();
+    const { pathname, isActive } = usePath();
+    const { navigate } = useUrl();
+    const { openPRDialog } = useModals(<NewRequestForm />);
+    const user = JSON.parse(localStorage.getItem('operator' || 'representative') || '');
+    const [isLoading, setIsLoading] = useState(true);
+    const fetchPurchaseOrganization = async (center: number): Promise<void> => {
+        const { data } = await api.get<PurchaseOrganizationProps[]>('purchase-organization', {
+            params: {
+                q: { center: { id: center } },
+            },
+        });
+        dispatch(setPOInfo(data[0]));
+    };
 
-    const isActive = (path: string): boolean => {
-        return location.pathname === path;
-    };
-    const navigate = (route: string): void => {
-        history.push(route);
-    };
-    const openPRDialog = (): void => {
-        dispatch(
-            setDialogInfo({
-                disableBackdropClick: true,
-                isOpen: true,
-                info: {
-                    title: 'Nova requisição de compra',
-                    subtitle: 'Preencha os dados abaixo para criar sua requisição',
-                    children: <NewRequestForm />,
-                },
-            }),
-        );
-    };
-    return (
+    useEffect(() => {
+        if (user.center) {
+            dispatch(setOperatorInfo(user));
+            fetchPurchaseOrganization(user.center.id);
+        } else {
+            dispatch(setRepresentativeInfo(user));
+        }
+        setIsLoading(false);
+    }, [user]);
+
+    const { id }: PurchaseRequisitionProps = useSelector(
+        (state: RootReducer) => state.purchaseRequisition.newPurchaseRequisitionInfo,
+    );
+
+    return !isLoading ? (
         <LayoutWrapper
             searchPlaceholder={pathname === '/tickets' ? 'Digite o numero do ticket' : 'busque uma ordem de serviço'}
             menuItems={[
@@ -44,13 +60,13 @@ const PageLayout: React.FC = ({ children }): JSX.Element => {
                 },
                 {
                     title: 'Tickets',
-                    onClick: (): void => history.push('/tickets'),
+                    onClick: (): void => navigate('/tickets'),
                     icon: <IconTicket />,
                     active: isActive('/tickets'),
                 },
                 {
                     title: 'Ver Requisições',
-                    onClick: (): void => history.push('/requisicoes-de-compra/'),
+                    onClick: (): void => navigate('/requisicoes-de-compra/'),
                     icon: <IconCredit />,
                     active: isActive('/requisicoes-de-compra/'),
                 },
@@ -58,16 +74,17 @@ const PageLayout: React.FC = ({ children }): JSX.Element => {
                     title: 'Nova requisição',
                     icon: <IconCredit />,
                     onClick: (): void => openPRDialog(),
+                    active: isActive(`/requisicoes-de-compra/nova/${id}`),
                 },
             ]}
             searchTerm={term}
             onChange={(e): void => setTerm(e.target.value)}
             user={{
-                id: '1',
-                name: 'Suellen Marques',
-                avatar: 'https://avatars0.githubusercontent.com/u/1234?s=460&v=4',
-                email: 'suellen@femsa.com.br',
-                role: UserRole.admin,
+                id: user.id,
+                name: user.name,
+                avatar: user.avatar,
+                email: user.email,
+                role: user.role,
             }}
             notifications={[
                 {
@@ -97,6 +114,10 @@ const PageLayout: React.FC = ({ children }): JSX.Element => {
         >
             {children}
         </LayoutWrapper>
+    ) : (
+        <FlexBox fullScreen verticalAlign="center" horizontalAlign="center">
+            <ReactLoading type="spinningBubbles" color={colors.colors.red} />
+        </FlexBox>
     );
 };
 

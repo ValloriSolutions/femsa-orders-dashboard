@@ -1,16 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, FlexBox, Select, Textarea } from '@vallorisolutions/foa-design-system';
 import { useDispatch } from 'react-redux';
 import { resetDialog } from '../../../store/modules/layout/actions';
 import { useEffect } from 'react';
-// import { setPRInfo } from '../../../store/modules/purchaseRequisition/actions';
+import { setPRInfo } from '../../../store/modules/purchaseRequisition/actions';
 import { OrderType } from '../../../mocks/entities';
+import { useUrl, uuid } from '../../../helpers/utils';
 
-const NewRequestForm: React.FC = (): JSX.Element => {
+const NewRequestForm: FC = (): JSX.Element => {
+    const id = useMemo(() => uuid(), []);
     const dispatch = useDispatch();
+    const { navigate } = useUrl();
+    useEffect(() => {
+        dispatch(setPRInfo({ id }));
+    }, []);
+
     const handleClose = (): void => {
         dispatch(resetDialog());
     };
@@ -18,6 +25,7 @@ const NewRequestForm: React.FC = (): JSX.Element => {
 
     useEffect(() => {
         formik.setFieldValue('type', typeValue);
+        dispatch(setPRInfo({ type: typeValue }));
     }, [typeValue]);
 
     const typeOptions = Object.values(OrderType)
@@ -26,6 +34,13 @@ const NewRequestForm: React.FC = (): JSX.Element => {
             id: String(type),
             name: String(type),
         }));
+    const handleSubmit = async (): Promise<void> => {
+        const values = formik.values;
+        await dispatch(setPRInfo({ requisitionGoal: values.requisitionGoal }));
+        formik.resetForm();
+        handleClose();
+        navigate(`/requisicoes-de-compra/nova/${id}`);
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -36,13 +51,18 @@ const NewRequestForm: React.FC = (): JSX.Element => {
             type: Yup.string().required('Escolha um typo para sua requisição'),
             requisitionGoal: Yup.string().required('Escolha um assunto'),
         }),
-        onSubmit: (/*values*/) => {
-            //dispatch(setPRInfo(values));
-        },
+        onSubmit: () => undefined,
     });
 
+    useEffect(() => {
+        formik.resetForm();
+    }, []);
+
     return (
-        <form onSubmit={formik.handleSubmit} style={{ marginLeft: '-5px', minWidth: '600px', textAlign: 'left' }}>
+        <form
+            onSubmit={(e): any => e.preventDefault()}
+            style={{ marginLeft: '-5px', minWidth: '600px', textAlign: 'left' }}
+        >
             <br />
             <Select
                 name="type"
@@ -71,7 +91,7 @@ const NewRequestForm: React.FC = (): JSX.Element => {
                 >
                     Cancelar
                 </Button>
-                <Button size="fluid" small type="submit" variant="primary">
+                <Button onClick={(): any => handleSubmit()} size="fluid" small type="submit" variant="primary">
                     Próximo
                 </Button>
             </FlexBox>

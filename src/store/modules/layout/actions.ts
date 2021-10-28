@@ -7,3 +7,4 @@ export const setIsLoading = (isLoading: boolean): any => action(LayoutTypes.SET_
 export const setDialogInfo = (dialogInfo: LayoutState['dialog']): any =>
     action(LayoutTypes.SET_DIALOG_INFO, dialogInfo);
 export const resetDialog = (): any => action(LayoutTypes.RESET_DIALOG);
+export const setRefreshList = (): any => action(LayoutTypes.SET_REFRESH);

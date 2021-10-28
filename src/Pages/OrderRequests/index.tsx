@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import {
     Table,
     TableBody,
@@ -9,6 +10,8 @@ import {
     Col,
     colors,
     FlexBox,
+    Dropdown,
+    DropdownItem,
 } from '@vallorisolutions/foa-design-system';
 import ReactLoading from 'react-loading';
 import React, { useEffect, useState } from 'react';
@@ -18,6 +21,7 @@ import { OrderStatusBadges } from '../../helpers/orders';
 import { PurchaseRequisitionProps } from '../../mocks/entities';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import { useUrl } from '../../helpers/utils';
 interface LocalOrdersProps extends PurchaseRequisitionProps {
     supplierOnline?: boolean;
 }
@@ -26,6 +30,8 @@ const orders: React.FC = (): JSX.Element => {
     // const history = useHistory();
     const [ordersList, setordersList] = useState<LocalOrdersProps[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    const { navigate } = useUrl();
 
     const fetchOrders = async (): Promise<void> => {
         const { data } = await api.get<LocalOrdersProps[]>('purchase-requisition');
@@ -63,7 +69,7 @@ const orders: React.FC = (): JSX.Element => {
                                     Status
                                 </TableCell>
                                 <TableCell component="th" order={'ASC'} orderBy={'submittedToSenniorAt'}>
-                                    Data de envio
+                                    Numero de rastreamento
                                 </TableCell>
                                 <TableCell component="th">Ações</TableCell>
                             </TableRow>
@@ -86,11 +92,30 @@ const orders: React.FC = (): JSX.Element => {
                                         {OrderStatusBadges(order.status)?.badge}
                                     </TableCell>
                                     <TableCell component="td" hasBadge>
-                                        {format(new Date(order?.submittedToSenniorAt), `dd/mm 'as' h:mm`, {
-                                            locale: ptBR,
-                                        })}
+                                        {order?.trackerNumber !== 0 ? order?.trackerNumber : 'N/a'}
                                     </TableCell>
-                                    <TableCell component="td"></TableCell>
+                                    <TableCell actionCell>
+                                        <Dropdown threeDots>
+                                            {order.status === 'Solicitação Aprovada' && (
+                                                <DropdownItem
+                                                    onClick={() => navigate('/solicitar-cotação/' + order.id)}
+                                                >
+                                                    Solicitar de Cotação
+                                                </DropdownItem>
+                                            )}
+                                            {order.status === 'Rascunho' && (
+                                                <DropdownItem onClick={() => undefined}>
+                                                    Finalizar Requisição
+                                                </DropdownItem>
+                                            )}
+                                            {order.status !== 'Ordem Cancelada' && (
+                                                <DropdownItem onClick={() => undefined}>
+                                                    Cancelar Solicitação
+                                                </DropdownItem>
+                                            )}
+                                            <DropdownItem onClick={() => undefined}>Ver Solicitação</DropdownItem>
+                                        </Dropdown>
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

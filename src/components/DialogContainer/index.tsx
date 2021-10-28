@@ -15,7 +15,7 @@ const DialogContainer = (): JSX.Element => {
             isOpen={dialog.isOpen}
             setOpen={(): void => dispatch(resetDialog())}
             info={dialog.info}
-            width="700px"
+            width={dialog.width}
         >
             {dialog.info.children}
         </Dialog>

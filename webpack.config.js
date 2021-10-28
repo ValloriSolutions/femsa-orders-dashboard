@@ -9,5 +9,9 @@ module.exports = {
             test: /\.css$/,
             use: ['style-loader', 'css-loader'],
         },
+        {
+            test: /\.(png|jpg)$/,
+            use: ['url-loader', 'file-loader'],
+        },
     ],
 };

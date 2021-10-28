@@ -1,17 +1,18 @@
+import { GlobalStyles } from '@vallorisolutions/foa-design-system';
 import React from 'react';
 import { Provider } from 'react-redux';
-import DialogContainer from './components/DialogContainer';
 import Navigation from './routes/Navigation';
 import store from './store';
+import ErrorBoundary from './errorBoundary';
 
 const App: React.FC = (): JSX.Element => {
     return (
-        <>
+        <ErrorBoundary>
             <Provider store={store}>
-                <DialogContainer />
+                <GlobalStyles />
                 <Navigation />
             </Provider>
-        </>
+        </ErrorBoundary>
     );
 };
 

@@ -4,6 +4,7 @@ import { PurchaseRequisitionState, PurchaseRequisitionTypes } from './types';
 
 const INITIAL_STATE: PurchaseRequisitionState = {
     isLoading: false,
+    refreshList: false,
     newPurchaseRequisitionInfo: {
         id: 0,
         trackerNumber: 0,
@@ -30,7 +31,18 @@ const reducer: Reducer<PurchaseRequisitionState> = (state = INITIAL_STATE, actio
         case PurchaseRequisitionTypes.SET_IS_LOADING:
             return { ...state, isLoading: action.payload };
         case PurchaseRequisitionTypes.SET_NEW_PURCHASE_REQUISITION_INFO:
-            return { ...state, newPurchaseRequisitionInfo: { ...state.newPurchaseRequisitionInfo, ...action.payload } };
+            return {
+                ...state,
+                newPurchaseRequisitionInfo: { ...state.newPurchaseRequisitionInfo, ...action.payload },
+            };
+        case PurchaseRequisitionTypes.SET_PRODUCTS_LIST:
+            console.log('SET_PRODUCTS_LIST', action.payload);
+            return {
+                ...state,
+                newPurchaseRequisitionInfo: { ...state.newPurchaseRequisitionInfo, productList: action.payload },
+            };
+        case PurchaseRequisitionTypes.RESET_PRODUCTS_LIST:
+            return INITIAL_STATE;
         default:
             return state;
     }

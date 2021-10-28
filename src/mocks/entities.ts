@@ -88,6 +88,7 @@ export interface NotificationProps extends ToolbarProps {
 /*ok*/ export interface UserProps {
     id: number;
     userId: number;
+    email: string;
     dashboardRole: UserRole | string;
 }
 
@@ -134,9 +135,9 @@ export interface NotificationProps extends ToolbarProps {
     id: number;
     name: string;
     notes?: string;
-    vendors: VendorProps[];
-    center: CenterProps;
-    groups: PurchaseGroupProps[];
+    vendors?: VendorProps[];
+    center?: CenterProps;
+    groups?: PurchaseGroupProps;
 }
 
 /*ok*/ export interface PaymentProps {
