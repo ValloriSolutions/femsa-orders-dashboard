@@ -77,6 +77,12 @@ const PageLayout: React.FC = ({ children }): JSX.Element => {
                     onClick: (): void => openPRDialog(),
                     active: isActive(`/requisicoes-de-compra/nova/${id}`),
                 },
+                {
+                    title: 'Solicitar Cotação',
+                    icon: <IconCredit />,
+                    onClick: (): void => navigate('/solicitar-cotação/1548'),
+                    active: isActive(`/solicitar-cotação/1548`),
+                },
             ]}
             searchTerm={term}
             onChange={(e): void => setTerm(e.target.value)}

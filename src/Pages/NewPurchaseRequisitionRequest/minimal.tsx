@@ -4,7 +4,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row, Typography, FlexBox, colors, Divider } from '@vallorisolutions/foa-design-system';
 import EmptyCard from '../../components/EmptyCard';
-import { useUrl } from '../../helpers/utils';
 import ReactLoading from 'react-loading';
 import { setRefreshList } from '../../store/modules/layout/actions';
 import { PurchaseRequisitionProps } from '../../mocks/entities';
@@ -14,15 +13,10 @@ import { AuthState } from '../../store/modules/auth/types';
 
 const NewPurchaseRequisitionRequest: React.FC = (): JSX.Element => {
     const dispatch = useDispatch();
-    const { navigate } = useUrl();
     const newPR: PurchaseRequisitionProps = useSelector(
         (state: RootReducer) => state.purchaseRequisition.newPurchaseRequisitionInfo,
     );
     const { userPO }: AuthState = useSelector((state: RootReducer) => state.auth);
-
-    useEffect(() => {
-        !newPR.type && navigate('/requisicoes-de-compra');
-    }, []);
 
     useEffect(() => {
         dispatch(setRefreshList());
