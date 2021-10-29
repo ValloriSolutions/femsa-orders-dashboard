@@ -35,6 +35,7 @@ const orders: React.FC = (): JSX.Element => {
 
     const fetchOrders = async (): Promise<void> => {
         const { data } = await api.get<LocalOrdersProps[]>('purchase-requisition');
+        console.log('aaaaaaaaaaaaaaaaaaaa', data);
         setordersList(data);
         setIsLoading(false);
     };

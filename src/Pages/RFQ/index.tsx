@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Card, Col, colors, Divider, FlexBox, Row, Typography } from '@vallorisolutions/foa-design-system';
+import { Button, Card, Col, FlexBox, Row, StepBar, Typography } from '@vallorisolutions/foa-design-system';
 import React from 'react';
 import { useUrl } from '../../helpers/utils';
+import NewPurchaseRequisitionRequest from '../NewPurchaseRequisitionRequest/minimal';
 
 const RFQ: React.FC = (): JSX.Element => {
-    const { params, navigate } = useUrl();
-    console.log(params);
+    const { navigate } = useUrl();
     return (
         <>
             <Row customStyles={{ marginBottom: 40 }}>
@@ -13,31 +13,31 @@ const RFQ: React.FC = (): JSX.Element => {
                     <Typography as="h1">Solicitação de Cotação</Typography>
                 </Col>
             </Row>
-            <Card fullHeight fullWidth customStyles={{ marginBottom: 40 }}>
-                <Row>
-                    <Col></Col>
-                </Row>
-                <Divider fullWidth borderColor={colors.colors.gray.lighter} />
-                <Row customStyles={{ width: '100%', marginBottom: 10 }}>
-                    <FlexBox direction="row" verticalAlign="center" horizontalAlign="center" noPadding fullWidth>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <Button
-                            style={{ marginRight: '20px', display: 'inline-block' }}
-                            size="fluid"
-                            variant="secondary"
-                            onClick={(): any => navigate('/requisicoes-de-compra')}
-                        >
-                            Voltar para requisições de compra
-                        </Button>
-                        <Button onClick={(): any => navigate()} size="fluid" variant="primary">
-                            Imprimir Requisição e mudar o status para &quot;Aguardando aprovação&quot;
-                        </Button>
-                    </FlexBox>
-                </Row>
+            <br />
+            <br />
+            <div style={{ width: '50%', margin: 'auto' }}>
+                <StepBar currentStep={1} total={3} />
+            </div>
+            <br />
+            <br />
+            <br />
+            <Card>
+                <NewPurchaseRequisitionRequest />
             </Card>
+            <br />
+            <FlexBox direction="row" verticalAlign="center" horizontalAlign="center" noPadding fullWidth>
+                <Button
+                    style={{ marginRight: '20px', display: 'inline-block' }}
+                    size="fluid"
+                    variant="secondary"
+                    onClick={(): any => navigate('/requisicoes-de-compra')}
+                >
+                    Voltar para requisições de compra
+                </Button>
+                <Button onClick={(): any => navigate('/tickets')} size="fluid" variant="primary">
+                    Continuar para a próxima etapa
+                </Button>
+            </FlexBox>
         </>
     );
 };

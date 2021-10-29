@@ -1,18 +1,13 @@
-import { Button } from '@vallorisolutions/foa-design-system';
+import { Typography } from '@vallorisolutions/foa-design-system';
 import React from 'react';
-import { useLogout } from '../../helpers/utils';
+import DashboardTiles from './dashboard';
 
 const Dashboard: React.FC = (): JSX.Element => {
+    const user = JSON.parse(localStorage.getItem('operator' || 'representative') || '');
     return (
         <>
-            <div>Dashboard</div>
-            <Button
-                onClick={(): void => {
-                    useLogout();
-                }}
-            >
-                Logout
-            </Button>
+            <Typography as="h1">Olá, {user.name}</Typography>
+            <DashboardTiles />
         </>
     );
 };

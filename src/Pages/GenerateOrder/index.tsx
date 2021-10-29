@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Card, Col, colors, Divider, FlexBox, Row, Typography } from '@vallorisolutions/foa-design-system';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useUrl } from '../../helpers/utils';
 import TitleOrderGenerated from './title';
 
 const GenerateOrder: React.FC = (): JSX.Element => {
-    const { params, navigate } = useUrl();
-    console.log(params);
+    const { navigate } = useUrl();
+    const params = useParams<{ id: string }>();
+    console.log(params.id);
     return (
         <>
             <Row customStyles={{ marginBottom: 40 }}>
@@ -22,7 +24,7 @@ const GenerateOrder: React.FC = (): JSX.Element => {
                         <br />
                         <br />
                         <br />
-                        <Typography as="h2">Requisição de número #934857435{/* {params.id} */}</Typography>
+                        <Typography as="h2">Requisição de número {params.id}</Typography>
                         <br />
                         <br />
                         <br />

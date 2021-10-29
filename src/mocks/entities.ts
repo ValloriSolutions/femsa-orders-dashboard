@@ -209,9 +209,9 @@ export interface NotificationProps extends ToolbarProps {
 }
 
 export interface RequestForQuotationProps {
-    purchaseRequisition: PurchaseRequisitionProps; // extrair org. de compras
+    purchaseRequisition: PurchaseRequisitionProps | null; // extrair org. de compras
     type: 'AB' | 'AN';
-    requestDate: string;
+    requestDate: string | Date;
     RFQColet: string; // tracker da cotação
     reference: {
         name: string;

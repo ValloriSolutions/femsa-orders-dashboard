@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { uuid } from '../../../helpers/utils';
+import { useUrl, uuid } from '../../../helpers/utils';
 import { Button, Input, Select, Typography } from '@vallorisolutions/foa-design-system';
 import RichTextEditor, { richTextInitialValue } from '../../../components/Editor/Editor';
 import { Descendant } from 'slate';
@@ -20,6 +20,7 @@ const intialValues = {
 };
 
 const NewTicketForm: React.FC = (): JSX.Element => {
+    const { navigate } = useUrl();
     const [value, setValue] = useState<Descendant[]>(richTextInitialValue);
     const orderNumberOptions = [
         { id: 1, name: `#${uuid()} - Reval – Atacado de Papelaria` },
@@ -84,7 +85,7 @@ const NewTicketForm: React.FC = (): JSX.Element => {
                 <RichTextEditor value={value} setValue={setValue} />
             </div>
             <br />
-            <Button size="full" variant="primary" onClick={(): any => formik.submitForm}>
+            <Button size="full" variant="primary" onClick={(): any => navigate('/ticket/9bce02c')}>
                 Enviar Solicitação
             </Button>
         </form>

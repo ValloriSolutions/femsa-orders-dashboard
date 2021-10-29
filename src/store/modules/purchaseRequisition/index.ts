@@ -24,6 +24,7 @@ const INITIAL_STATE: PurchaseRequisitionState = {
         openenedAt: '',
         refreshList: false,
     },
+    requestForQuotation: undefined,
 };
 
 const reducer: Reducer<PurchaseRequisitionState> = (state = INITIAL_STATE, action) => {
@@ -40,6 +41,12 @@ const reducer: Reducer<PurchaseRequisitionState> = (state = INITIAL_STATE, actio
             return {
                 ...state,
                 newPurchaseRequisitionInfo: { ...state.newPurchaseRequisitionInfo, productList: action.payload },
+            };
+        case PurchaseRequisitionTypes.SET_CURRENT_RFQ_INFO:
+            console.log('SET_CURRENT_RFQ_INFO', action.payload);
+            return {
+                ...state,
+                requestForQuotation: { ...action.payload },
             };
         case PurchaseRequisitionTypes.RESET_PRODUCTS_LIST:
             return INITIAL_STATE;

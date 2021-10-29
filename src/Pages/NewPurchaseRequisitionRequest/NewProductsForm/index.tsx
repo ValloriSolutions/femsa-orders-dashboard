@@ -9,11 +9,11 @@ import {
     Divider,
     FlexBox,
     Input,
-    Options,
     Row,
     Select,
     Textarea,
     Typography,
+    SearchSelect,
 } from '@vallorisolutions/foa-design-system';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetDialog } from '../../../store/modules/layout/actions';
@@ -30,7 +30,7 @@ const NewProductsForm: FC = (): JSX.Element => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState<boolean>(true);
     const [products, setProducts] = useState<ProductProps[]>([]);
-    const [codeList, setCodeList] = useState<Options[]>([]);
+    const [codeList, setCodeList] = useState<any[]>([]);
     const { operator, userPO } = useSelector((state: RootState) => state.auth);
     const { productList } = useSelector((state: RootState) => state.purchaseRequisition.newPurchaseRequisitionInfo);
 
@@ -46,8 +46,8 @@ const NewProductsForm: FC = (): JSX.Element => {
         setProducts(data);
         setCodeList(
             data.map((product: ProductProps) => ({
-                id: product.code,
-                name: product.code,
+                label: product.code,
+                value: product.code,
             })),
         );
         setLoading(false);
@@ -107,8 +107,8 @@ const NewProductsForm: FC = (): JSX.Element => {
         flexDirection: 'row',
     };
 
-    const handleCodeSelection = (value: string | number): void => {
-        const product = products.find((p) => p.code === value);
+    const handleCodeSelection = (value: any): void => {
+        const product = products.find((p) => p.code === value.value);
         if (product) {
             formik.setFieldValue('id', product.id);
             formik.setFieldValue('code', product.code);
@@ -137,13 +137,17 @@ const NewProductsForm: FC = (): JSX.Element => {
                     <Typography as="h5">Cabeçalho</Typography>
                 </Col>
                 <Divider fullWidth borderColor={colors.border.disabled} />
-                <Col size={2} customStyles={colStyles}>
-                    <Select
-                        label="Código do Produto"
-                        placeholder="Ex. M-E098"
-                        value={formik.values.code}
-                        setValue={(e): any => handleCodeSelection(e)}
+                <Col size={3} customStyles={colStyles}>
+                    <SearchSelect
+                        setSelectedValue={handleCodeSelection}
+                        selectedValue={formik.values.code}
                         options={codeList}
+                        isDisabled={false}
+                        isLoading={false}
+                        name="test"
+                        placeholder="Ex. M-E098"
+                        label="Código do Produto"
+                        messageError={formik.errors.code}
                     />
                 </Col>
                 <Col size={7} customStyles={colStyles}>

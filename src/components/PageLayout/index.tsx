@@ -5,12 +5,13 @@ import {
     IconDashboard,
     FlexBox,
     colors,
+    Button,
 } from '@vallorisolutions/foa-design-system';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { api } from '../../api';
 import { useModals } from '../../helpers/modals';
-import { usePath, useUrl } from '../../helpers/utils';
+import { useLogout, usePath, useUrl } from '../../helpers/utils';
 import { PurchaseOrganizationProps, PurchaseRequisitionProps } from '../../mocks/entities';
 import NewRequestForm from '../../Pages/NewPurchaseRequisitionRequest/NewRequestForm';
 import { RootReducer } from '../../store/modules';
@@ -113,6 +114,11 @@ const PageLayout: React.FC = ({ children }): JSX.Element => {
             ]}
         >
             {children}
+            <br />
+            <br />
+            <br />
+            <br />
+            <Button onClick={(): void => useLogout()}>Logout</Button>
         </LayoutWrapper>
     ) : (
         <FlexBox fullScreen verticalAlign="center" horizontalAlign="center">
