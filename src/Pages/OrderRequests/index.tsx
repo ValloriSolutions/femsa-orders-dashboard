@@ -19,8 +19,6 @@ import React, { useEffect, useState } from 'react';
 import { api } from '../../api';
 import { OrderStatusBadges } from '../../helpers/orders';
 import { PurchaseRequisitionProps } from '../../mocks/entities';
-import { format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
 import { useUrl } from '../../helpers/utils';
 interface LocalOrdersProps extends PurchaseRequisitionProps {
     supplierOnline?: boolean;

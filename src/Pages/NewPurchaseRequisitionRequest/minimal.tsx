@@ -1,93 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Row, Typography, FlexBox, colors, Divider, Button, IconPrint } from '@vallorisolutions/foa-design-system';
+import { Col, Row, Typography, FlexBox, colors, Divider } from '@vallorisolutions/foa-design-system';
 import EmptyCard from '../../components/EmptyCard';
-import { useUrl, uuid10 } from '../../helpers/utils';
+import { useUrl } from '../../helpers/utils';
 import ReactLoading from 'react-loading';
-import { resetDialog, setRefreshList } from '../../store/modules/layout/actions';
+import { setRefreshList } from '../../store/modules/layout/actions';
 import { PurchaseRequisitionProps } from '../../mocks/entities';
 import { RootReducer } from '../../store/modules';
-import { useModals } from '../../helpers/modals';
-import NewProductsForm from './NewProductsForm';
 import ProductsTable from './ProductsTable';
 import { AuthState } from '../../store/modules/auth/types';
-import { api } from '../../api';
-import { resetPRInfo } from '../../store/modules/purchaseRequisition/actions';
 
 const NewPurchaseRequisitionRequest: React.FC = (): JSX.Element => {
-    const trackerNumber = uuid10();
     const dispatch = useDispatch();
     const { navigate } = useUrl();
-    const [loading, setLoading] = useState(false);
     const newPR: PurchaseRequisitionProps = useSelector(
         (state: RootReducer) => state.purchaseRequisition.newPurchaseRequisitionInfo,
     );
     const { userPO }: AuthState = useSelector((state: RootReducer) => state.auth);
-
-    const handleSubmit = async (): Promise<void> => {
-        await api.post<PurchaseRequisitionProps>('purchase-requisition', {
-            ...newPR,
-            status: 'Requisição Criada',
-            trackerNumber,
-        });
-        setLoading(false);
-        dispatch(setRefreshList());
-        dispatch(resetPRInfo());
-        dispatch(resetDialog());
-        navigate('/ordem-gerada/' + trackerNumber);
-    };
-
-    const saveToDatabaseAsDraft = async (): Promise<void> => {
-        setLoading(true);
-        await api.post<PurchaseRequisitionProps>('purchase-requisition', { ...newPR, status: 'Rascunho' });
-        setLoading(false);
-        dispatch(setRefreshList());
-        dispatch(resetPRInfo());
-        dispatch(resetDialog());
-        navigate('/requisicoes-de-compra/');
-    };
-
-    const CancelButtons: React.FC = (): JSX.Element => {
-        return (
-            <div
-                style={{
-                    marginTop: '1rem',
-                    marginBottom: '1rem',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignContent: 'center',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100%',
-                }}
-            >
-                <Button
-                    onClick={(): Promise<void> => saveToDatabaseAsDraft()}
-                    variant="primary"
-                    color="primary"
-                    style={{
-                        marginRight: '1rem',
-                    }}
-                >
-                    {!loading ? (
-                        'Sim, gostaria de salvar como rascunho'
-                    ) : (
-                        <ReactLoading type="bars" color={colors.colors.white} height="24" />
-                    )}
-                </Button>
-                <Button onClick={(): void => dispatch(resetDialog())} variant="secondary">
-                    Não, quero permanecer nesta página
-                </Button>
-            </div>
-        );
-    };
-
-    const { openCancelDialog } = useModals(<CancelButtons />);
-    const handleCancel = (): void => {
-        openCancelDialog();
-    };
 
     useEffect(() => {
         !newPR.type && navigate('/requisicoes-de-compra');
@@ -97,7 +28,6 @@ const NewPurchaseRequisitionRequest: React.FC = (): JSX.Element => {
         dispatch(setRefreshList());
     }, []);
 
-    const { openProductDialog } = useModals(<NewProductsForm />);
     return newPR.type ? (
         <>
             <Row customStyles={{ width: '100%', height: '100%' }}>
